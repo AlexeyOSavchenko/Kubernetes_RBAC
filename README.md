@@ -3,8 +3,8 @@
     Create namespace prod. Create users prod_admin, prod_view. Give the user prod_admin admin rights on ns prod, give the user prod_view only view rights on namespace prod.
     Create a serviceAccount sa-namespace-admin. Grant full rights to namespace default. Create context, authorize using the created sa, check accesses.
 
-openssl genrsa -out deploy_view.key 2048
-openssl req -new -key deploy_view.key -out deploy_view.csr -subj "//CN=deploy_view"
+openssl genrsa -out deploy_view.key 2048  
+openssl req -new -key deploy_view.key -out deploy_view.csr -subj "//CN=deploy_view"  
 openssl x509 -req -in deploy_view.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out deploy_view.crt -days 500
 kubectl config set-credentials deploy_view --client-certificate=deploy_view.crt --client-key=deploy_view.key
 kubectl config set-context deploy_view --cluster=minikube --user=deploy_view
